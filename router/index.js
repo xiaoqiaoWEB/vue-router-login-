@@ -1,9 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import home from '@/components/home'
-import login from '@/components/login'
-import layout from '@/views/layout'
+let home = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/home'))
+  },'abc')
+}
+
+let login = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/login'))
+  },'abc')
+}
+
+
+//abc  同时加载 
+
+//import home from '@/components/home'
+
+
+//import login from '@/components/login'
+//import layout from '@/views/layout'
+let layout = (resolve) => { //按需加载
+  return import('@/views/layout')
+}
 
 import project from '@/views/backend/project'
 import workbench from '@/views/backend/workbench'
